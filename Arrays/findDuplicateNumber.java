@@ -1,3 +1,4 @@
+package Arrays;
 // Find the Duplicate Number:
 
 // Given an array of integers nums containing n + 1 integers where each integer is in the range [1, n] inclusive.
@@ -24,12 +25,6 @@
 // Approach 1: Brute Force
 // Using for loop inside for loop
 
-
-
-
-
-
-
 // Approach 2: Using hashmap/hashset
 
 class Solution {
@@ -43,5 +38,27 @@ class Solution {
             set.add(nums[i]);
         }
         return len;
+    }
+}
+
+    // Most optimal
+    //Approach 3: using slow and fast pointers
+    // 1) look for a cycle - if slow and fast collide at a point -> indicates there's a cycle
+    // 2) look for the meeting point
+    class Solution {
+    public int findDuplicate(int[] nums) {
+        int len = nums.length;
+        int slow = nums[0];
+        int fast = nums[0];
+        do{
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+        }while(slow != fast);
+         slow = nums[0];
+         while(slow != fast){
+            slow = nums[slow];
+            fast = nums[fast];
+         }
+         return slow;
     }
 }
